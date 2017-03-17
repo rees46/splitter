@@ -74,31 +74,35 @@
 ## Подготовка NGINX
 
 1. Установить NGINX с поддержкой Lua >=5.1
+```
 Если версия ниже 1.9.11, если выше то переходим сразу к пункту 2:
-cd /opt
-apt-get source nginx
+cd /opt 
+apt-get source nginx 
 git clone https://github.com/openresty/lua-nginx-module.git
 nginx -V
-копируем все от --prefix=/usr/share/nginx до первого --add-module, добавляем:
+Копируем все от --prefix=/usr/share/nginx до первого --add-module, добавляем:
 --add-module=/opt/lua-nginx-module --with-ld-opt="-L /usr/local/lib" --with-cc-opt="-I /usr/local/include"
 И дальше модули по желанию
 make
 make install
 mv /usr/share/nginx/sbin/nginx /usr/sbin/nginx
 Перезагружаем nginx
-
+```
 2. Ставим lua:
+```
 apt-get install lua5.1
 Менеджер пакетов для lua:
 apt-get install luarocks
 luarocks install luasec
-
+```
 3. Установить модуль https://github.com/nrk/redis-lua
+```
 luarocks install redis-lua
-
+```
 4. Установить resty.jit-uuid
+```
 luarocks install lua-resty-jit-uuid
-
+```
 5. Установить Redis 3x
 
 ## Настройка хоста
