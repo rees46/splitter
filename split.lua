@@ -47,7 +47,7 @@ end
 -- Сохраняет сегмент в БД
 local function saveSegment(client, shop_key, experiment, ssid, segment)
     local key = shop_key .. '_' .. experiment .. '_' .. ssid
-    client:setex(key, 86400, segment)
+    client:setex(key, 3600, segment)
 end
 
 
