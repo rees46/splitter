@@ -6,7 +6,14 @@
     <script src="r46_splitter.js"></script>
     <script>
 
-        var segment = r46_splitter('o91y2eiu', 'product_recommendations', 3)
+    	// Sync
+        var segment = r46_splitter('o91y2eiu', 'product_recommendations', 3);
+        console.log('Sync request segment:' + segment);
+
+        // Async
+        r46_splitter('o91y2eiu', 'product_recommendations', 3, function(segment) {
+        	console.log('Async request segment:' + segment);
+        });
 
     </script>
 </head>
