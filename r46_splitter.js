@@ -10,17 +10,22 @@ window.r46_splitter = function(shop_key, experiment, total_segments, success) {
     var segment = null;
     var XHR = window.XDomainRequest || window.XMLHttpRequest; 
     var xhr = new XHR();
+    xhr.withCredentials = true;
     var url = window.location.protocol + '//split.rees46.com/?shop_key=' + shop_key + '&experiment=' + experiment + '&total_segments=' + total_segments + '&c=' + Math.random();
-    
+
     // Sync or async?
     if(success && typeof(success) == 'function') {
         xhr.onreadystatechange = function(){
-            if(xhr.status == 200) {
-                success(xhr.responseText);
-            } else {
-                success(null);
+            if(xhr.readyState == 4) {
+                if(xhr.status == 200) {
+                    success(xhr.responseText);
+                } else {
+                    success(null);
+                }
             }
         };
+        xhr.open('GET', url, true);
+        xhr.send();
     } else {
         xhr.open('GET', url, false);
         xhr.send();
